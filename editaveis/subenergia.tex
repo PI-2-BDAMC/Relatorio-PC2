@@ -2,148 +2,169 @@
 
 \section{Objetivo Específico}
 
-Dimensionar o sistema de arrefecimento e de admissão de um motor a combustão interna e de um dinamômetro de bancada. Com isso analisar as transferências de calor presentes no sistema, o fluxo de ar, consumo de combustível e emissões gasosas.
-
-Fazer o estudo da instalação elétrica do dinamômetro de bancada juntamente com seu ligamento a rede.
-
-\section{Recursos}
-
-Para estudo de emissões gasosas será utilizado um analisador de gases (PC-Multigás NAPRO) como CO, CO$_{2}$, HC, O$_{2}$, NO$_{x}$. Esse equipamento será conectado ao sistema de exaustão obtendo dados por meio do método de medição de infravermelho não dispersivo. 
-
-O processo de instalação elétrica do dinamômetro será auxiliada por um técnico especializado por questão de segurança, já que se trata de um sistema de alta tensão. Os equipamentos de proteção individual (EPIs) utilizados pertencem a Faculdade Gama UnB.
+Analisar o sistema de arrefecimento (transferências de calor), sistema de admissão (fluxo de ar), sistema de exaustão (emissões gasosas), consumo de combustível e desempenho de um motor a combustão interna por meio de um ensaio a vazio.
 
 \section{Concepção e detalhamento do subsistema}
 
 \subsection{Sistema de Arrefecimento}
 
-Em motores automotivos o arrefecimento é geralmente feito à líquido. Este líquido é um fluido refrigerante que, sendo bombeado por entre as camisas do motor e pelo cabeçote, resfria os componentes e, em seguida, passa pelo radiador onde ocorrerá a transferência de calor no sentido de dissipar o calor absorvido \cite{energiaToyota}.
+A temperatura do motor de combustão interna (MCI) influencia no consumo de combustível, na eficiência e na emissão de gases, portanto este é um importante parâmetro a ser avaliado nos testes dos motores [2].
 
-O sistema de arrefecimento deve ser dimensionado para as condições em que estará submetido, não podendo estar subdimensionado para que não haja um superaquecimento do motor. É composto por uma bomba, uma válvula termostática, um radiador e um fluido refrigerante. A bomba d'água é acionada pela correia de sincronismo o que garante que a rotação da bomba e sua vazão sejam proporcionais a rotação do motor \cite{energiaToyota}. 
+A transferência de energia de calor no motor ocorre por condução, convecção e por radiação. Os trocadores de calor são os principais dispositivos que irão propiciar esta transferência de calor para o ambiente. O radiador é um tipo de trocador de calor que são geralmente classificados como compactos e de escoamento cruzado sem mistura.
 
-A válvula termostática é feita por uma cera derivada do petróleo que se expande ao ser aquecida, forçando a abertura para a saída do líquido de arrefecimento quando o motor já estiver aquecido, ao mesmo tempo que impede que ele esfrie em condições de baixa temperatura externa \cite{energiaToyota}.  
-
-O fluido refrigerante é composto por uma solução de água e etilenoglicol. O etilenoglicol em solução com a água permite que, em determinadas concentrações, a solução possua um ponto de congelamento a temperaturas inferiores a 0$^{\circ}$C e um ponto de ebulição a temperaturas superiores a 100$^{\circ}$C \cite{energiaToyota}. %adicionar Graus
-
-O radiador é uma superfície aletada onde ocorrem as trocas de calor com o ambiente. As aletas são utilizadas para aumentar a transferência de calor com o ambiente e aumentam muito a taxa de transferência de calor com a partir da superfície.  Esse efeito ocorre devido às várias folhas finas de metal que são colocadas nos tubos de água quente e que aumentam várias vezes a superfície de convecção \cite{energiaTransferencia}.
-
-Todo o sistema de arrefecimento já está presente no motor que será utilizado para os testes. Serão colocados dois sensores de temperatura antes e depois do motor para que possam ser efetuados os cálculos da transferência de calor, bem como monitorar a temperatura do líquido de arrefecimento. Esse monitoramento é necessário para garantir que a  variação de temperatura não ultrapasse 10$^{\circ}$C e que a temperatura de saída do motor não ultrapasse 100$^{\circ}$C.  Conhecendo-se a temperatura do fluido na entrada ($T_{e}$) e a temperatura na saída ($T_{s}$), a taxa de transferência de calor a partir do fluido de resfriamento para o ar é dada por:
-
-\begin{equation}
-	Q = mc_{p}t = mc_{p}(T_{e} - T_{s})
-\end{equation}
-
-Para determinar a efetividade do trocador de calor será dada por:
-
-\begin{equation}
-	\varepsilon = \frac{Q}{Q_{max}}
-\end{equation}
-
-$Q_{max}$ é a taxa de transferência de calor máxima possível dada por:
-
-\begin{equation}
-	Q_{max} = c_{min} \times (T_{1} - T_{2})
-\end{equation}
-
-$C_{min}$ é a menor capacidade térmica entre os fluidos do trocador
-
-\begin{equation}
-	C_{min} = m \times c_{p}
-\end{equation}
-
-$T_{1}$: Temperatura de entrada do fluido de maior capacidade térmica
-
-$T_{2}$: Temperatura de entrada do fluido de menor capacidade térmica
-
-$m$ : Vazão mássica do fluido (kg/s)
-
-$c_{p}$ : Calor específico a pressão constante (J/kg.K)
-
-\subsection{Sistema de Admissão}
-
-O Sistema de Controle de Admissão de Ar  - SCAA do projeto tem o objetivo de avaliar a massa de ar (volume por unidade de tempo) que é admitido para o interior da câmara de combustão do motor.
-
-As informações do SCAA e do Sistema de Controle de Escape de Gases - SCEG permite identificar, através de testes, a composição ideal em porcentagem da mistura ar/combustível para atingir o melhor consumo de combustível (combustão completa). 
-
-O SCAA será fixado no coletor de ar do motor em análise pela bancada didática de motor a combustão. O SCAA é composto por uma luva metálica, tubulação metálica, um fluxômetro, e uma válvula de controle de entrada de ar. A luva metálica acoplará o coletor de ar do motor à tubulação metálica onde serão fixados o fluxômetro e válvula de controle de entrada de ar. As informações do fluxo serão enviadas para a Central de Controle de Dados - CCD. A válvula de controle de entrada de ar será ajustada via computador.
-
-No monitoramento do sistema de admissão, serão analisados dois parâmetros: massa e temperatura do ar que entra na câmara de combustão. Para o cálculo da massa de ar, será elaborado um modelo matemático utilizando as variáveis de pressão e temperatura da caixa estabilizadora de ar e a pressão do ambiente. A caixa estabilizadora tem o objetivo de manter um fluxo de ar contínuo no sistema.
-
-A temperatura do ar será coletada diretamente de um sensor de temperatura posicionado no coletor de admissão.
-
-\subsection{Instalação do Dinamômetro}
-
-Para funcionamento deste equipamento, será necessário um amplo estudo de viabilidade técnica e financeira. A unidade de controle do dinamômetro funciona em alta voltagem, por isso necessita de um projeto de sistema de aterramento, dimensionamento do cabeamento.
-
-O projeto de aterramento se resume nas seguintes etapas:
-
-\begin{enumerate}
-	\item Entrada dos dados básicos de projeto
-	\begin{itemize}
-		\item Modelagem do solo;
-		\item Determinação da corrente de falta máxima que fluirá pelo aterramento;
-		\item Área a ser utilizada para instalação do aterramento; 
-	\end{itemize}
-	\item Determinação da corrente máxima tolerável pelo corpo humano e das tensões de passo e de toque admissíveis
-	\item Proposta de arranjo inicial dos eletrodos
-	\item Avaliação da resistência de aterramento, da distribuição de potenciais no solo, e da elevação de potencial da malha
-	\item Revisão e refinamento da malha de aterramento
-\end{enumerate}
-
-Esse procedimento deve ser realizado com intuito de minimizar danos materiais, manter os limites de segurança de modo que reduza a possibilidade de acidentes como choques \cite{raggi2009}.
-
-O cabeamento principal será utilizado na conexão da unidade de controle do dinamômetro com a rede. Para isso é necessário o dimensionamento dos cabos e posteriormente a viabilidade econômica pois a distância do laboratório da bancada em questão e a subestação da Faculdade Gama UnB é relativamente longa.
-
-A partir de uma análise da demanda de energia elétrica na faculdade durante vários momentos do dia, será escolhido o horário em que a demanda for menor para realização dos testes de acordo com a curva de demanda (energia elétrica consumida x tempo).
-
-\subsection{Análise de teste}
-
-Posteriormente a finalização do projeto, serão realizados testes que demonstram a sua funcionalidade de forma que sirva como material didática para possíveis estudos. Dentres eles, será analisado o consumo de combustível e emissões gasosas com diferentes misturas de combustíveis. 
-
-A medição do consumo de combustível será analisada pelo método volumétrico. Para isso, utiliza-se uma bureta graduada como da figura \ref{buretaGraduada} na linha de alimentação e por meio da diferença no nível de combustível para um determinado intervalo de tempo de funcionamento do motor será fornecido o volume consumido \cite{perissinoto2015}.
+O trocador de calor utilizado no laboratório de testes do MCI é o modelo 7351123R da Valeo, Figura X1:
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[keepaspectratio=true,scale= 0.7]{figuras/bureta-graduada.PNG}
-	\caption{Bureta para medida volumétrica do consumo de combustível}
-	\label{buretaGraduada}
+	\includegraphics[keepaspectratio=true,scale= 0.6]{figuras/radiador.png}
+	\caption{Radiador utilizado no laboratório de testes de MCI. Fonte: APS Distribuidora.}
+	\label{radiador}
 \end{figure}
 
-A maior fonte de poluição urbana do ar pode ser relacionado com o motor a combustão interna ciclo Otto e ciclo Diesel (HEYWOOD, 1988). Além do gás carbônico produzido nas reações de combustão, outros gases também são formados, como  o monóxido de carbono (CO), óxidos de nitrogênio (NOx), hidrocarbonetos (HC), oxigênio (O2), compostos orgânicos voláteis (COVs), entres outros.
+As dimensões são mostradas na Figura a seguir:
 
-Ao conhecer os mecanismos de formação de poluentes gerados pelo motor, pode-se associar a tecnologias de gerenciamento de controle. Com isso, compreende-se que os níveis de emissões gasosas veiculares podem ser controlados e regulamentados, adequando-se aos padrões exigidos pela legislação e buscando uma menor poluição do meio ambiente. 
-
-O órgão que delimita os limites legais de emissões veiculares, no Brasil, é o Conselho Nacional do Meio Ambiente (CONAMA). Para a implementação das resoluções, citadas na Tabela \ref{resoluçõesConama}, o CONAMA criou o Programa de Controle da Poluição do Ar por Veículos Automotores (PROCONVE) para os veículos leves e pesados, fixando prazos, limites máximos de emissões e estabelecendo exigências tecnológicas para veículos automotores, nacionais e importados \cite{energiaAvaliacao}.
-
-\begin{table}[h!]
+\begin{figure}[h!]
 	\centering
-	\caption{Resoluções CONAMA aplicadas a veículos no Brasil \cite{energiaAvaliacao}.}
-	\label{resoluçõesConama}
-	\begin{tabular}{|l|l|l|l|}
-		\hline
-		\multicolumn{4}{|c|}{RESOLUÇÕES CONAMA} \\ \hline
-		Nº 01/1993      & Nº 07/1993;      & Nº 226/1997     & Nº 297/2002;     \\ \hline
-		Nº 08/1993      & Nº 14/1995;      & Nº 242/1998;     & Nº 315/2002;     \\ \hline
-		Nº 15/1995      & Nº 16/1995      & Nº 282/2001;     & Nº 415/2009.     \\ \hline
-	\end{tabular}
+	\includegraphics[keepaspectratio=true,scale= 0.5]{figuras/dimensoes-radiador.png}
+	\caption{Dimensões do radiador. Fonte: Catálogo Valeo Arrefecimento.}
+	\label{dimensoes-radiador}
+\end{figure}
+
+Admitindo-se que o escoamento é permanente, a taxa de transferência de calor do fluido quente será igual a taxa de transferência de calor do fluido frio e pode ser determinada por [1]:
+
+\begin{equation}
+	Q = mc_{ph}(T_{h, in} - T_{h, out}) = mc_{pc}(T_{c, in} - T_{c, out})
+\end{equation}
+
+Utilizando o método da diferença de temperatura média logarítmica (LMTD) e conhecendo-se as temperaturas na entrada e na saída, a taxa de transferência de calor também poderá ser definida por [1] :
+
+\begin{equation}
+	Q = UA_{s}\Delta T_{lm}
+\end{equation}
+
+Onde:
+
+$Q$: taxa transferência de calor;
+
+$U$: coeficiente global de transferência de calor;
+
+$A_{s}$: área de superfície;
+
+$\Delta T_{lm}$: diferença de temperatura média logarítmica.
+
+A diferença de temperatura média logarítmica é dada por :
+
+\begin{equation}
+	\Delta T_{lm} = \frac{\Delta T_{1}-\Delta T_{2}}{ln \frac{\Delta T_{1}}{\Delta T_{2}}}
+\end{equation}
+
+$\Delta T_{1}$ e $\Delta T_{2}$ são as diferenças de temperatura entre os dois fluidos.
+
+Para o trocador de calor de escoamento cruzado em que os fluidos não se misturam utiliza-se um fator de correção F que pode ser encontrado no seguinte gráfico:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 0.3]{figuras/fator-de-correcao.png}
+	\caption{Fator de correção para trocador de calor de único passe e com fluidos sem mistura.[1]}
+	\label{fator-de-correcao}
+\end{figure}
+
+Sendo que o trocador de calor já está definido, busca-se a determinação da efetividade de tal trocador. Para isso é utilizado o método da efetividade-NTU. A efetividade do trocador de calor é definida como se segue [1]:
+
+\begin{equation}
+	\varepsilon = \frac{Q}{Q_{max}} = \frac{taxa de transferência de calor real}{taxa de transferência de calor máxima}
+\end{equation}
+
+A taxa de transferência de calor máxima é determinada por:
+
+\begin{equation}
+	Q_{max} = C_{min} (T_{h, in} - T_{h, out})
+\end{equation}
+
+Onde $C_{min}$ é a taxa de capacidade térmica do fluido de menor capacidade térmica e é dada pela seguinte equação:
+
+\begin{equation}
+	C_{min} = mc_{p}
+\end{equation}
+
+O número de unidades de transferência de calor, NTU, é:
+
+\begin{equation}
+	NTU = \frac{UA_{s}}{C_{min}}
+\end{equation}
+
+A efetividade do radiador poderá ser definida pela seguinte equação:
+
+\begin{equation}
+	\varepsilon = 1 - e^{\left [ \left ( \frac{C_{min}}{C_{max}} \right ) ^{-1} \left ( NTU \right ) ^{0,22} \left \{ e^{\frac{-C_{min}}{C_{max}} \left ( NTU \right ) ^{0,22}} -1 \right \} \right ]}
+\end{equation}
+
+Os sensores de temperatura serão posicionados na mangueira do radiador antes da entrada do fluido de arrefecimento no bloco do motor e depois de ter sido feito o resfriamento do motor, ou seja, na saída do motor. Sendo assim, será possível ter o controle da temperatura no motor e fazer as avaliações de troca de calor.
+
+Para fazer os cálculos da transferência de calor, é necessário conhecer os parâmetros de fluxo de água na mangueira do radiador e o fluxo de ar pelo radiador. A medida do fluxo de água será feita por meio de um sensor medidor de fluxo e a medida do fluxo de ar será feita medindo-se a velocidade do fluxo de ar através do núcleo do radiador com o auxílio de um anemômetro e assim, calcula-se a vazão de ar multiplicando a velocidade pela área frontal do radiador.
+
+O calor rejeitado do motor é proporcional à potência útil, portanto deverá ser gerado um gráfico do calor gerado a diferentes rotações do motor.
+
+\subsection{Sistema de Admissão}
+
+\subsection{Sistema de Dinamômetro}
+
+O conjunto de equipamentos do dinamômetro presente no laboratório de testes do motor de combustão interna é composto por uma central de comando, um motor, um sistema de refrigeração acoplado ao motor e um banco de baterias.
+
+Devido ao fato do conjunto estar na universidade por cerca de 7 anos sem utilização, a principal ação necessária seria a identificação do tipo de motor para a realização dos testes de manutenção específicos para avaliação das condições de funcionamento da máquina.
+
+No entanto, um entrave encontrado para a realização dos testes foi a não caracterização da máquina devido a falta de informação nas placas de identificação.
+
+Sendo assim, descartou-se a utilização do dinamômetro na bancada de testes devido a limitação de informações e ao tempo que limita a realização do trabalho.
+
+
+\subsection{Sistema de Emissões}
+
+A maior fonte de poluição urbana do ar pode ser relacionado com o motor a combustão interna, pois além do gás carbônico produzido nas reações de combustão, outros gases também são formados, como  o monóxido de carbono ($CO$), óxidos de nitrogênio ($NO_{x}$), hidrocarbonetos ($HC$), oxigênio ($O_{2}$), compostos orgânicos voláteis (COVs), entres outros.
+
+O órgão que delimita os limites legais de emissões veiculares, no Brasil, é o Conselho Nacional do Meio Ambiente (CONAMA). Para a implementação das resoluções, o CONAMA criou o Programa de Controle da Poluição do Ar por Veículos Automotores (PROCONVE) para os veículos leves e pesados, fixando prazos, limites máximos de emissões e estabelecendo exigências tecnológicas para veículos automotores, nacionais e importados. [3]
+
+Ao conhecer os mecanismos de formação de poluentes gerados pelo motor, pode-se associar a tecnologias de gerenciamento de controle. Com isso, compreende-se que os níveis de emissões gasosas veiculares podem ser controlados e regulamentados, adequando-se aos padrões exigidos pela legislação e buscando uma menor poluição do meio ambiente.
+
+Na bancada de teste do MCI, esta medição será feita por meio do analisador de gases universal (PC-MULTIGÁS) baseado no método de medição de infravermelho não dispersivo.
+
+\begin{table}[]
+\centering
+\caption{Dados técnicos do analisador de gases (NAPRO)[4].}
+\label{my-label}
+\begin{tabular}{|c|c|}
+\hline
+ALIMENTAÇÃO        & 12VDC ou 110/110AVC – 60Hz                                                                                    \\ \hline
+ESCALAS            & \begin{tabular}[c]{@{}c@{}}CO: 0 - 15\%\\ CO2: 0 - 20\%\\ HC: 0 - 20000ppm Hexano\\ O2: 0 - 25\%\end{tabular} \\ \hline
+\textbf{DIMENSÕES} & 290 x 150 x 310 mm                                                                                            \\ \hline
+PESO               & 4 Kg                                                                                                          \\ \hline
+\end{tabular}
 \end{table}
 
-Para isso será conectado ao sistema de exaustão o equipamento analisador compacto de gases (Pc-Multigás) gerando as porcentagens das emissões gasosas presentes. Devido ao ruído gerado por esse sistema, serão acopladas duas caixas abafadoras para controle do mesmo.
+O equipamento será acoplado ao coletor do motor (sistema de exaustão) por meio de uma mangueira contendo na extremidade de contato uma sonda de captação de gases. Assim as medições ($CO$, $CO_{2}$, $HC$ e $O_{2}$) serão coletadas pelo analisador e enviadas para o scanner PC-SCAN que mostrará o diagnóstico veicular.
 
-\section{Levantamento de Custos}
-
-A tabela \ref{tabelaDeValores} a seguir estima aproximadamente os valores gastos para o desenvolvimento de estudo do subsistema de energia.
-
-\begin{table}[h!]
+\begin{figure}[h!]
 	\centering
-	\caption{My caption}
-	\label{tabelaDeValores}
-	\begin{tabular}{|l|l|l|}
-		\hline
-		\multicolumn{1}{|c|}{}   & \multicolumn{1}{c|}{Descrição}                                                                        	& \multicolumn{1}{c|}{Valor} \\ \hline
-		Sistema de arrefecimento & \begin{tabular}[c]{@{}l@{}}- Trocador de calor\\ - Bomba d’água\\ - Válvula termostática\end{tabular} & R\$ 485,00                  \\ \hline
-		Sistema de admissão      & - Caixa estabilizadora                                                                                		& R\$ 250,00                  \\ \hline
-		Análise de emissões      & - Analisador de gases compacto                                                                        		& R\$ 8000,00                 \\ \hline
-		Consumo de combustível   & - Bureta graduada                                                                                     		& R\$ 70,00                   \\ \hline
-	\end{tabular}
-\end{table}
+	\includegraphics[keepaspectratio=true,scale= 1.0]{figuras/esquematico-operacional.png}
+	\caption{Esquemático operacional para análise de emissões.}
+	\label{esquematico-operacional}
+\end{figure}
 
+O método usado pelo equipamento para obtenção dos dados utiliza o princípio de que as moléculas de um determinado gás absorvem o raio infravermelho e analisa de forma contínua a variação da concentração de um componente específico de uma mistura gasosa, sendo denominado como método de medição de infravermelho não dispersivo. [5]
+
+Basicamente, cada componente (molécula), possui um comprimento de onda (e frequência correspondente) específico, baseado nisso e na transmitância, é possível obter a concentração de determinados componentes que estão situados na região IR ($infrared$).
+
+A partir dos dados obtidos pelo programa, será feita uma análise relacionando as porcentagens de cada gás emitido com a composição do combustível utilizado. Observando também toda questão legislativa mencionada anteriormente, pois é um fator imprescindível para a indústria automotiva.
+
+\subsection{Consumo de combustível}
+
+Tendo como análise um motor a gasolina, os ensaios serão realizados utilizando três misturas:
+
+\begin{itemize}
+\item Gasolina pura;
+\item Gasolina Comum Brasileira (tipo C): mistura E27 - correspondente a um percentual de 73\% de gasolina pura e 27\% de álcool anidro (AEAC);
+\item Mistura E50: correspondente a um percentual de 50\% de gasolina pura e 50\% de álcool anidro (AEAC);
+\end{itemize}
+
+Para obtenção da gasolina com máximo grau de pureza, foi utilizado o método de extração líquido-líquido. Sendo baseado na diferença de solubilidade do álcool na gasolina e na solução de $NaCl$ (usada para aumentar a solubilidade do álcool em água, pois sendo este sal um composto iônico, a sua solução é mais polar do que a água pura, desta maneira consegue-se extrair com mais eficiência o álcool da camada orgânica, gasolina).
+Quanto a medição do consumo de combustível foi considerado o método mássico que consiste em colocar uma balança sob o tanque de combustível. Utilizando-se da escala da balança como referência, quando o ponteiro passar por um valor conhecido aciona-se o cronômetro e quando o ponteiro passar por um novo valor conhecido, para-se o cronômetro. [6]
