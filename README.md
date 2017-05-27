@@ -1,2 +1,2 @@
-# Relatorio-PC1
-Repositório destinado ao primeiro relatório da disciplina Projeto Integrador2 2017.1
+# Relatorio-PC2
+Repositório destinado ao segundo relatório da disciplina Projeto Integrador2 2017.1
