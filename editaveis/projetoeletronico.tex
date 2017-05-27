@@ -205,3 +205,144 @@ A tabela \ref{tabelaCustos} apresenta os custos dos componentes a serem utilizad
 		Total                                                                                           & R\$: 460,16             & 125                 &                                                                                                                                                                                                           \\ \hline
 	\end{tabular}
 \end{table}
+\newpage
+\section{Materiais e Metodos}
+Os materiais utilizados no projeto são:
+\begin{itemize}
+	\item Protoboard
+	\item Jumpers
+	\item Adaptador SMD DIP8
+	\item Sensor de Pressão Diferencial MPX5700
+	\item Compensador de Junta fria e Conversor A/D MAX6675
+	\item Termopar tipo K
+	\item Capacitores (1uF,0.01uF,0.1uF)
+	\item MSP430
+	\item Raspberry Pi 
+	\item Kit Circuito Impresso
+	\item Placa para Circuito Impresso
+	
+\end{itemize}
+
+\section{Descrição dos Componentes}
+Alguns dos componentes tem sua descrição detalhada dispensável como a Protoboard, Jumpers, capacitores, microcontroladores e o adaptador para o C.I. que foi utilizado somente para acoplá-lo corretamente à protoboard e realizar testes antes de confeccionar o circuito final, vista a diferença na dimensão do C.I (SMD) para o acoplamento da protoboard (DIP). A seguir serão apresentados os mais relevantes para o bom entendimento da composição e funcionamento deste subsistema.
+
+\subsection{Sensor de Pressão Diferencial MPX5700}
+Este sensor, ilustrado na Figura \ref{SensordePressao} nada mais é que um transdutor piezoresistivo com leitura diferencial de pressão, compensação de temperatura e ganho definido. Apresenta um erro máximo na leitura de 2.5\% dentro da temperatura de operação (0 -  85 graus Celcius) e ideal para aplicações com microcontroladores embarcados.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 1.5]{figuras/mpx_5700.PNG}
+	\caption{ Sensor de Pressão Diferencia}
+	\label{SensordePressao}
+\end{figure}
+A faixa de leitura de pressão é de 15 a 700KPa (2.18 a 101.5psi) com saída analógica de 0.2 a 4.7V. Considerando que a entrada diferencial representa a pressão ambiente, a saída mínima representa este valor. Caso a entrada seja isolada, se obtêm a pressão absoluta da entrada analisada.
+Por ser um sensor ativo, a alimentação necessária é por padrão 5V mas permite o correto funcionamento entre 4.75V – 5.25V. Pode-se também utilizar uma alimentação inferior, que em questão será de 3.3V, porém deve-se observar a correspondência com a saída. Tal relação é observada na eq.(3.2).
+\begin{equation}
+V_{out} = V_{s}*(0.00369 * P + 0.04)+2.5\%V_{out} 	
+\end{equation}
+Sendo P a pressão que se deseja obter, Vout a tensão de saída do sensor e Vs a tensão de alimentação.
+A sensibilidade do sensor é definida a partir da variação da saída em tensão em relação à entrada. Que consiste em 6.4mV a cada KPa de entrada.
+Quanto às características físicas, possui 6 pinos, porém somente 3 são utilizados, que são correspondentes à alimentação, referência e saída. As entradas são duas, diferenciais, sendo uma a referência absoluta e a outra a que se deseja ser analisada.
+Sua curva característica pode ser observada na Figura \ref{Curva} . 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 1.5]{figuras/curva_carc.PNG}
+	\caption{ Curva característica do MPX5700.}
+	\label{Curva}
+\end{figure}
+\subsection{Compensador de Junta Fria e Conversor A/D MAX6675}
+O MAX6675 realiza a compensação de junta fria necessária para ler com coerência a diferença de tensão na saída do termopar. Também converte para digital esta tensão diferencial de saída com resolução de 12 bits e permite um passo de 0.25 graus Celsius dentro da faixa de 0 a 700 graus com precisão. 
+É especificamente utilizado em aplicações microcontroladas e acoplado a termopares tipo K. Sua ligação física é mostrada na Figura \ref{Circuito}, sendo compatível com o microcontrolador a ser utilizado neste projeto.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 0.9]{figuras/sensor_temp.PNG}
+	\caption{ Circuito para Sensor de Temperatura.}
+	\label{Circuito}
+\end{figure}
+A resolução do sensor associada ao circuito é de 41 $\mu$V por grau Celsius com um erro máximo de 3 graus por leitura. Tornando então a ideia de uma média das leituras viável para obter o valor mais próximo ao real. Esta leitura leva em consideração que a temperatura da junta na extremidade do termopar se encontra a mesma da temperatura ambiente. Caso contrário deve-se subtrair estes valores e multiplicar pelo valor da saída para compensar o erro na leitura.
+Alimentado com 3.3V, considerando a possibilidade de 3 – 5V, a o erro pode chegar até 5 estados lógicos e a constante de conversão do termopar é de 10.25 $\mu$V por estado lógico.
+Uma visão interna do C.I. pode ser observada na Figura \ref{Circuitomax} .
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 0.7]{figuras/max6675.PNG}
+	\caption{ Circuito interno max6675.}
+	\label{Circuitomax}
+\end{figure}
+\subsection{Termopar tipo K}
+O termopar é um sensor de temperatura simples e de vasta aplicação. Consiste basicamente em dois metais distintos de duas junções e unidos em uma das pontas. Quando há diferença de temperatura entre a junção unida e a separada gera uma diferença de tensão entre as duas pontas separadas.
+Tipo K define o tipo de material que, neste caso permite leituras de temperatura de aproximadamente -270 a 1200 graus Celcius.
+Todos os componentes obtidos são apresentados nos anexos deste documento. 
+
+\section{PROCEDIMENTOS PARA FUNCIONAMENTO DOS SENSORES}
+Para iniciar os testes com os sensores um protótipo do circuito final impresso é projetado na protoboard para certificar que tudo está funcionando como esperado e realizar alguns ajustes. Após concluída esta etapa o acoplamento dos sensores no motor deve ser realizado e por fim o circuito final desenvolvido para que possa então permanecer em funcionamento permanente na bancada.
+Abaixo serão apresentados alguns dos avanços já realizados:
+\begin{itemize}
+\item Foram adquiridos os sensores de pressão, de temperatura, os capacitores necessários para montagem do circuito e o circuito integrado para condicionar e converter o sinal de saída do termopar de analógico para digital.
+\item Com o sensor de pressão foi montado o circuito mostrado na Figura \ref{Circuitompx} e testada a variação de tensão na saída com o auxílio de uma seringa. Observando corretamente a variação linear de tensão de saída, que é regida pela eq. (3.2)
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 1.5]{figuras/circuito_mpx.PNG}
+	\caption{ Circuito para MPX5700.}
+	\label{Circuitompx}
+\end{figure}
+\item Este sensor diferencial de pressão possui saída analógica, necessitando então de uma conversão para correta apresentação digital dos seus dados. Conversão não necessária para o sensor de temperatura visto que o sinal adquirido será digital.
+\item Após a conversão dos dados é necessário transmitir os mesmos para introduzi-los à interface com o usuário e assim realizar a análise dos dados adquiridos.
+\end{itemize}
+Tanto a conversão quanto a transmissão foram realizadas com sucesso seguindo exatamente o fluxograma da Figura \ref{Fluxograma1}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 0.7]{figuras/diagrama_de_transmissao.PNG}
+	\caption{ Fluxograma de conversão e transmissão de dados dos sensores.}
+	\label{Fluxograma1}
+\end{figure}
+Os procedimentos futuros para que se possa concluir o objetivo de coletar, tratar e apresentar os sinais relevantes, obtidos do motor, para análise de seu funcionamento são:
+\begin{itemize}
+	\item Realizar testes de funcionamento do termopar com o circuito integrado acoplado;
+	\item Calibrar os sensores;
+	\item Ler os valores de saída dos sensores a partir do microcontrolador;
+	\item Calcular a conversão de tensão para as grandezas que se deseja obter;	
+\end{itemize}
+\section{PROCEDIMENTOS PARA CONTROLE DO MOTOR}
+O sistema de controle de acionamento e aceleração do motor é composto principalmente pelo sistema de comunicação entre raspberry e msp430 via I$^{2}$C. O fluxo do sistema parte do acionamento do usuário pela aplicação que inicia um comando de uma requisição de escrita da raspberry em um registrador da msp430, se o valor enviado for igual o valor pré-definido para executar a operação uma das portas digitais recebe nível alto acionando o optoacoplador que sequencialmente aciona a contatora para acionar o motor de partida. Quando o motor inicia a combustão os eixos do motor são acionados gerando então pulsos no sensor de giro, este sensor é conectado a uma porta de entrada da msp430 para definir o início da combustão, quando esta porta recebe algum valor diferente de 0V a msp430 corta a alimentação do motor de partida, desacionando a contatora.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 1.5]{figuras/fluxograma1.PNG}
+	\caption{ Fluxograma de Acionamento do Motor}
+	\label{ Fluxograma de Acionamento do Motor}
+\end{figure}
+Para o controle de aceleração o sistema será binário (aceleração total ou totalmente desacelerado). Assim como o sistema de acionamento, o fluxo do sistema de aceleração parte de um comando do usuário que inicia uma requisição de escrita da raspberry na msp430 se o valor de escrita for igual ao valor pré-definido, a msp430 configura uma de suas portas para uma saída PWM(\textit{Pulse Width Modulation}) que habilita a rotação do servomotor em 90$^{o}$ fazendo a abertura total da válvula borboleta. A desacelaração é realizada pelo mesmo comando do usuário, seguindo o mesmo fluxo descrito.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 1.5]{figuras/fluxograma2.PNG}
+	\caption{ Fluxograma de Aceleração/Desaceleração do Motor}
+	\label{ Fluxograma de Aceleração/Desaceleração do Motor}
+\end{figure}
+\section{PROCEDIMENTOS PARA CONVERSÃO E TRANSMISSÃO DE SINAIS}
+Ao total são 6 sensores analógicos que necessitam de conversão para realizar o tratamento e disposição digital. O sistema de conversão e transmissão de dados são posteriores ao condicionamento dos sinais.
+O msp430 possui 8 canais para conversão ADC(\textit{Analogic to Digital Conversor}) conversão múltiplas. Para o projeto, serão utilizados 6 canais, tendo em vista o número de sensores analógicos presentes no projeto. O conversor ADC foi configurado para atuar no modo de múltiplas conversões que dessa forma, inicia a conversão no canal mais significativo (no caso canal A6 - 1 por sensor) até o conversor menos significativo (A0). Além disso, o conversor possui uma resolução de 10 bits. Como os valores de tensão estão em uma faixa entre [0, 3.3] volts a precisão do conversor é dado por:
+\begin{equation}
+precisão = \frac{3.3}{2^{10}}
+\end{equation}
+Os valores de tensão convertidos em palavras binárias apresentam valores inteiros entre 0 e 1023, onde 1023 representa a tensão máxima de 3.3V.
+O sistema de comunicação I$^{2}$C realiza a transmissão de 1 byte por vez, como o conversor é de 10 bits, a transmissão de uma palavra referente a um sensor necessita então de dois bytes. Portanto, se cada 2 bytes representam um valor de um sensor, portanto 6 sensores representam um total de:
+\begin{equation}
+total de bytes por conversão = (2*6)bytes = 12bytes
+\end{equation}
+O conversor é configurado para realizar continuamente as conversões dos 6 canais, assim que o usuário executa o comando “START” que aciona o motor. A conversão destes 6 canais são armazenados em uma variável de tamanho 12 bytes, armazenando o valor das 6 conversões.
+Quando o usuário executa o comando “INICIAR ENSAIO” inicia-se a comunicação I$^{2}$C entre raspberry e msp430. A taxa de transmissão é configurada através de um timer que configura a taxa de transmissão em 100Kbits/s ou então 12.5Kbytes/s. Esta taxa de transmissão garante que não haja violação de \textit{setup} ou violação de \textit{hold}, fazendo com que não haja perda de informação ou encavalamento de bits.
+Como a variável que contém o valor de todos os sensores possui tamanho de 12 bytes o tempo estimado para transmissão é dado por:
+\begin{equation}
+tempo de transmissão = \frac{12bytes}{12.5Kbytes/s} = 960 \mu s
+\end{equation}
+Este é o tempo para transmitir a informação, porém na configuração I$^{2}$C ainda são transmitidos, condição de start, condição de parada, endereço, dados, condição de parada, totalizando um total de 24 bits ou 3 bytes. Portanto para transmitir todos os valores são transmitidos um total de 3*12bytes = 36 bytes, portanto o tempo total de transmissão é dado por:
+\begin{equation}
+tempo total de transmissão = \frac{36bytes}{12.5Kbytes/s} = 2.88 ms
+\end{equation}
+A taxa de conversão dos sensores obedecendo o critério de Nyquist é configurado para uma taxa de 1KHz ou 1000 amostras/s sabendo que o sinal de maior frequência possui frequência de 256 Hz.
+\\%colocar fig da simulação de transmissão
+\begin{figure}[h!]
+	\centering
+	\includegraphics[keepaspectratio=true,scale= 1.5]{figuras/Simulacao_I2C.PNG}
+	\caption{Simulação da leitura, conversão e transmissão de dois sensores analógicos}
+	\label{Simulação}
+\end{figure}
+Sempre que a raspberry envia o número decimal 85 é realizada uma conversão e transmissão de todos os sensores conectados aos canais de conversão da MSP430. No exemplo da Figura \ref{Simulação} a apenas variou-se o valor do sensor 1 mantendo o valor do sensor 2 em nível 0 para confirmar a medição.
